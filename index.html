@@ -1,0 +1,31 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Graphing</title>
+</head>
+
+<body>
+    <div id="navbar" class="navbar">
+        <!-- <h2>Graphing Visualizer</h1> -->
+        <a id="title" href="index.html">Graphing Visualizer</a>
+        <a id="nodeCreate" onclick="nodeCreateToolClicked()">Node Create</a>
+        <a id="edgeCreate" onclick="edgeCreateToolClicked()">Edge Create</a>
+        <a id="createGrid" class="active"onclick="createGridToolClicked()">Create Grid</a>
+
+    </div>
+    <div id="canvas">
+        <svg id="svg" height="100%" width="100%"></svg>
+    </div>
+    <!-- <div class="node">
+        <p>1</p>
+    </div> -->
+    <script src="js\jquery-3.5.1.js"></script>
+    <script src="js/nodes.js"></script>
+    <script src="js/loop.js"></script>
+    <script src="js/events.js"></script>
+</body>
+
+</html>
