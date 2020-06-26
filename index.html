@@ -1,61 +1,320 @@
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/objects.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <title>Graphing</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kyle Jeffrey - Personal Website</title>
+    <link rel="shortcut icon" type="image/png" href="assets/img/icon/favicon.ico">
+    <!-- all css here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/default-css.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- modernizr css -->
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<!-- <a id="nodeCreate" onclick="nodeCreateToolClicked()">Node Create</a> -->
-<!-- <button id="edgeCreate" class="btn" > Edge Create</button> -->
-<!--  <a id="title" class="nav-link" href="index.html">Graphing Visualizer</a> -->
 
-<body>
-    <nav class="navbar text-white bg-dark navbar-expand-md" id="navbar">
-        <a href="index.html" class="navbar-brand d-flex w-25 mr-auto text-white">Graphing Visualizer</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
-            <ul class="navbar-nav w-100 justify-content-start " id="toolbar">
-                <button id="nodeCreate" class="btn btn-md btn-inverse text-white"
-                    onclick="nodeCreateToolClicked()">Nodes</button>
-                <button id="edgeCreate" class="btn btn-md btn-inverse text-white"
-                    onclick="edgeCreateToolClicked()">Edges</button>
-                <button id="" class="btn btn-md btn-Danger" onclick="BFSclicked()">RUN BFS</button>
-                <button id="" class="btn btn-md btn-Primary" onclick="nodesArray[0].connect()">Connect</button>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="jumbotron canvas" id="canvas" onclick="canvasClicked();">
-        <svg id="svg" height="100%" width="100%">
-            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" />
-            </marker>
-        </svg>
+<body id="top">
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader_line"></div>
     </div>
-    <script src="js\jquery-3.5.1.js"></script>
-    <script src="js/classes.js"></script>
-    <script src="js/alogrithms.js"></script>
-    <script src="js/loop.js"></script>
-    <script src="js/events.js"></script>
+    <!-- prealoader area end -->
+    <!-- header area start -->
+    <header>
+        <div class="header-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="logo">
+                            <a href="index.html"><img src="assets/img/icon/logo.png" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-9 d-none d-md-block">
+                        <div class="main-menu">
+                            <nav class="nav-menu">
+                                <ul id="nav_menu">
+                                    <li class="active"><a data-hover="home" href="#home"><span>Home</span></a></li>
+                                    <li><a data-hover="portfolio" href="#portfolio"><span>Portfolio</span></a></li>
+                                    <li><a data-hover="about" href="#about"><span>About</span></a></li>
+                                    <li><a data-hover="contact" href="#contact"><span>Contact</span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 d-block d-md-none">
+                        <div class="responsive-menu-wrap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header area end -->
+    <!-- slider area start -->
+    <section id="home" class="slider-area parallax" data-speed="3" data-bg-image="assets/img/bg/slider-bg3.jpg">
+        <div class="container">
+            <div class="slider-content">
+                <h2 class="txtanim1"><span>I'm</span> <span>Kyle</span> <span>Jeffrey</span></h2>
+                <h4 class="txtanim1 delay1">
+                    <span>R</span>
+                    <span>o</span>
+                    <span>b</span>
+                    <span>o</span>
+                    <span>t</span>
+                    <span>i</span>
+                    <span>c</span>
+                    <span>s</span>
+                    <span> </span>
+                    <span>E</span>
+                    <span>n</span>
+                    <span>g</span>
+                    <span>i</span>
+                    <span>n</span>
+                    <span>e</span>
+                    <span>e</span>
+                    <span>r</span>
+                </h4>
+            </div>
+        </div>
+        <div class="white_svg svg_white">
+            <svg x="0px" y="0px" viewBox="0 186.5 1920 113.5">
+                <polygon points="0,300 655.167,210.5 1432.5,300 1920,198.5 1920,300 " />
+            </svg>
+        </div>
+        <div class="txtanim1 next-section">
+            <span><a href="#about">about me <strong><i class="fa fa-question-circle"></i></strong></a></span>
+        </div>
+    </section>
+    <!-- slider area end -->
+    <!-- portfolio area start -->
+    <section class="fortfolio-area bg-gray pt--100 pb--200" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="txt2_is_show">My Portfolio</h2>
+            </div>
+            <div class="fortfolio-filter">
+                <button class="active" data-filter="*">All</button>
+                <button data-filter=".lab">Lab Reports</button>
+                <button data-filter=".web">Web Projects</button>
+                <!-- <button data-filter=".marketing">Marketing</button> -->
+            </div>
+            <div class="portfolio-masonary row" id="container">
 
+                <!-- Portfolio item with overlay -->
+                <div class="prt-grid web col-md-4 col-sm-6">
+                    <div class="prt-item">
+                        <div class="prt-item-overlay">
+                            <div class="d-flex justify-content-center" style="height: 100%;flex-direction: column;">
+                                <h2 class="my-3">Graph Theory</h2>
+                                <span> Javascript, HTML, and CSS Project</span>
+                                <div class="btn-group btn-lg justify-content-center">
+                                    <a class="btn btn-dark" href="https://alphabeard.github.io/">Live Website</a>
+                                    <a class="btn btn-dark"
+                                        href="https://github.com/AlphaBeard/AlphaBeard.github.io">Github
+                                        Repository</a>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="assets/img/portfolio/graph_theory.jpg" alt="image">
+                    </div>
+                </div>
 
-    <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
+                <!-- <div class="prt-grid lab web col-md-4 col-sm-6">
+                    <div class="prt-item">
+                        <a class="expand-img" href="assets/img/portfolio/img2.jpg"><img
+                                src="assets/img/portfolio/img2.jpg" alt="image"></a>
+                    </div>
+                </div>
+                <div class="prt-grid col-md-4 col-sm-6">
+                    <div class="prt-item">
+                        <a class="expand-img" href="assets/img/portfolio/img3.jpg"><img
+                                src="assets/img/portfolio/img3.jpg" alt="image"></a>
+                    </div>
+                </div>
+                <div class="prt-grid design marketing col-md-4 col-sm-6">
+                    <div class="prt-item">
+                        <a class="expand-img" href="assets/img/portfolio/img4.jpg"><img
+                                src="assets/img/portfolio/img4.jpg" alt="image"></a>
+                    </div>
+                </div>
+                <div class="prt-grid web design col-md-4 col-sm-6">
+                    <div class="prt-item">
+                        <a class="expand-img" href="assets/img/portfolio/img5.jpg"><img
+                                src="assets/img/portfolio/img5.jpg" alt="image"></a>
+                    </div>
+                </div>
+                <div class="prt-grid design marketing col-md-4 col-sm-6">
+                    <div class="prt-item">
+                        <a class="expand-img" href="assets/img/portfolio/img6.jpg"><img
+                                src="assets/img/portfolio/img6.jpg" alt="image"></a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="white_svg svg_white">
+            <svg x="0px" y="0px" viewBox="0 186.5 1920 113.5">
+                <polygon points="0,300 655.167,210.5 1432.5,300 1920,198.5 1920,300 " />
+            </svg>
+        </div>
+    </section>
+    <!-- portfolio area end -->
+    <!-- about area strat -->
+    <section class="about-area" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <div class="abt-left-thumb">
+                        <img src="assets/img/about/me_handsome.jpg" alt="image">
+                    </div>
+                </div>
+                <div class="col-md-7 offset-md-1">
+                    <div class="abt-content">
+                        <div class="section-title">
+                            <h2 class="txt2_is_show">About Me</h2>
+                        </div>
+                        <p class="txt1-wrap"><span class="txt1">I'm a fourth year Robotics Engineering Student at UCSC,
+                                a member of the Tau Beta Pi Engineering Society and recently ended employment with an on
+                                campus startup as the Lead Hardware Engineer.</span></p>
+                        <p class="txt1-wrap"><span class="txt1">I have experience with C, Python, Javascript, Verilog,
+                                and Matlab. My primary experience
+                                has involved low level embedded systems programming using C and microprocessor
+                                architecture and hardware simulation using FPGA boards. I do have some experience in
+                                higher level languages including web development using Javascript. </span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about area end -->
+    <!-- service area start -->
+    <!-- <div class="service-area pb--200">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="single-service txt2_is_show">
+                        <div class="icon"><span class="flaticon-web-design"></span></div>
+                        <div class="srvc-content">
+                            <h4>Web Design</h4>
+                            <p>I ought to just try that with my boss; I'd get kicked out on the spot. But who knows,
+                                maybe that would be the best</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-service txt2_is_show">
+                        <div class="icon"><span class="flaticon-settings"></span></div>
+                        <div class="srvc-content">
+                            <h4>Illustrator</h4>
+                            <p>I ought to just try that with my boss; I'd get kicked out on the spot. But who knows,
+                                maybe that would be the best</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-service txt2_is_show">
+                        <div class="icon"><span class="flaticon-adobe"></span></div>
+                        <div class="srvc-content">
+                            <h4>Branding Identity</h4>
+                            <p>I ought to just try that with my boss; I'd get kicked out on the spot. But who knows,
+                                maybe that would be the best</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="white_svg svg_gray">
+            <svg x="0px" y="0px" viewBox="0 186.5 1920 113.5">
+                <polygon points="0,300 655.167,210.5 1432.5,300 1920,198.5 1920,300 " />
+            </svg>
+        </div>
+    </div> -->
+    <!-- service area end -->
+    <!-- contact area start -->
+    <section class="contact-area ptb--100" id="contact">
+        <div class="container">
+            <div class="section-title" style="margin-left:38%;margin-right:40%;text-align: center;">
+                <h2 class="txt2_is_show">Get In Touch</h2>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="cnt-left">
+                        <ul>
+                            <li>Santa Cruz, <span class="ct-break">California</span></li>
+                            <li>kajeffre@ucsc.edu</li>
+                        </ul>
+                        <div class="social-link">
+                            <h5>Social Links:</h5>
+                            <a href="https://www.linkedin.com/in/kyle-jeffrey-1651b5189/"><i
+                                    class="fa fa-linkedin"></i></a>
+                            <a href="https://github.com/AlphaBeard"><i class="fa fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-md-7">
+                    <div class="contact-form">
+                        <div class="screen-reader-response"></div>
+                        <form action="mail.php" id="cf">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" id="name" name="name" placeholder="Name Here*">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" id="email" name="email" placeholder="Email Here*">
+                                </div>
+                            </div>
+                            <textarea name="msg" id="msg" placeholder="Message Here*"></textarea>
+                            <div class="form-submit">
+                                <button type="submit" name="submit" id="cnt_submit">Send Message <i
+                                        class="fa fa-long-arrow-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <!-- contact area end -->
+    <!-- footer area start -->
+    <footer>
+        <div class="footer-area bg-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-4">
+                        <div class="flogo">
+                            <a href="index.html"><img src="assets/img/icon/flogo.png" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-8">
+                    </div>
+                </div>
+                <div class="go-to-top">
+                    <a href="#top"><i class="fa fa-angle-up"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer area end -->
+    <!-- jquery latest version -->
+    <script src="assets/js/vendor/jquery-3.2.0.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- others plugins -->
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </body>
 
 </html>
