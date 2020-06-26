@@ -40,8 +40,8 @@ class Node {
 
         this.x = x;
         this.y = y;
-        this.velx = random(-1, 1);
-        this.vely = random(-1, 1);
+        this.velx = 0;
+        this.vely = 0;
     }
     update() {
         this.nodeElement.style.top = this.y + 'px'
