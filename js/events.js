@@ -3,20 +3,18 @@ var edgeCreateTool = false;
 var createGridTool = false;
 var nodeMoveInProgress = false;
 var currentNode = undefined;
+var bfsInterval; 
 
 var mouseX = 0;
 var mouseY = 0;
-var mouseDownVar = false;
 
-const NAVBAR_HEIGHT = document.getElementById("navbar").clientHeight;
-const NAVBAR_WIDTH = document.getElementById("navbar").clientWidth;
-document.body.onmouseup = mouseUp;
-document.body.onmousedown = mouseDown;
+var bfsObj;
+
 document.body.onmousemove = mouseMove;
 
-function mouseDown(e) {
-    mouseDownVar = true;
-    mouseUpVar = false;
+function BFSclicked() {
+    bfsObj = new BFS_class(graph, 0);
+    bfsInterval = setInterval(() => { BFS(bfsObj) }, 300);
 }
 function mouseMove(e) {
     mouseX = e.clientX;
@@ -24,48 +22,51 @@ function mouseMove(e) {
     if (nodeMoveInProgress) {
         if (edgeCreateTool) return;
         currentNode.x = mouseX - NODE_RADIUS;
-        currentNode.y = mouseY - NODE_RADIUS;
+        currentNode.y = mouseY;
     }
 }
-function mouseUp(e) {
-    mouseDownVar = false;
-    mouseUpVar = true;
-    if (nodeCreateTool) {//Nodecreatetool must be active to make node
-        if (e.clientY < NAVBAR_HEIGHT) return; //If clicked in navbar don't create node
-        nodeCreate(e.offsetX, e.offsetY);
-    } else if (edgeCreateTool) {
 
+function canvasClicked() {
+    if (nodeCreateTool) {//Nodecreatetool must be active to make node
+        nodeCreate(mouseX, mouseY + NAVBAR_HEIGHT);
     }
 }
+
 function nodeCreate(x, y) {
     let body = document.getElementById("canvas");
-    let node = new Node(mouseX - NODE_RADIUS, mouseY - NODE_RADIUS, body);
+    let node = new Node(x - NODE_RADIUS, y - NODE_RADIUS, body);
     node.nodeElement.onmousedown = function () { nodeClicked(node) }; //Cannot do this inside the constructor because can't pass "this" 
     nodesArray.push(node);
+    graph.addVertex();
+    node.nodeElement.classList += " node-placed";
+    // createNodeAnimate(node);
 }
 
 function nodeClicked(node) {
-    if (edgeCreateInProgress) {
-        let currentEdge = edgesArray[edgesArray.length - 1];
+    if (edgeCreateInProgress) { //Create Edge
         edgeCreateInProgress = false;
+        let currentEdge = edgesArray[edgesArray.length - 1];
 
         // DELETE DUPLICATE EDGES
-        let matchNodes = edgesArray.filter(edge => edge.node2 == node); //find edges with same node2
-        if (matchNodes[0]) {
-            if (matchNodes[0].node1 == currentEdge.node1) { //delete edge if same  node1
+        let edgeWithSameTerminus = edgesArray.filter(edge => edge.node2 == node); //find edges with same node2
+        if (edgeWithSameTerminus[0]) {
+            if (edgeWithSameTerminus[0].node1 == currentEdge.node1) { //delete edge if the same edge
                 currentEdge.destroyHTMLElement();
                 edgesArray.pop();
                 return;
             }
         }
+
         currentEdge.node2 = node;
+        graph.addEdge(currentEdge.node1.vertex, currentEdge.node2.vertex);
 
     } else if (edgeCreateTool) {
         edgeCreateInProgress = true;
         let svg = document.getElementById("svg");
         let edge = new Edge(mouseX, mouseY, node, undefined, svg); //creates html element as well as abstract edge
         edgesArray.push(edge);
-    } else if(!nodeCreateTool){
+
+    } else if (!nodeCreateTool) { //Move edge
         nodeMoveInProgress = !nodeMoveInProgress;
         currentNode = node;
     }
@@ -97,18 +98,24 @@ function destroyGrid() {
 
 // Button interactions
 function nodeCreateToolClicked() { //Node Creation tool
-    if (edgeCreateTool || createGridTool) return; //If other tools are active
+    if (edgeCreateTool) {
+        $("#edgeCreate").removeClass("active");
+        edgeCreateTool = false;
+    }
     nodeCreateTool = !nodeCreateTool;
     let nodeButton = document.getElementById("nodeCreate");
     if (nodeButton.classList.contains("active")) {
-        nodeButton.classList = ""
+        nodeButton.classList.remove("active");
     } else {
         nodeButton.classList.add("active")
     }
 }
 
 function edgeCreateToolClicked() { //edge Creation tool
-    if (nodeCreateTool || createGridTool) return;
+    if (nodeCreateTool) {
+        $("#nodeCreate").removeClass("active");
+        nodeCreateTool = false;
+    }
     if (edgeCreateInProgress) { //If I click the edgecreatetool while im currently creating an edge, remove that edge
         let edge = edgesArray.pop();
         edge.destroyHTMLElement();
@@ -117,7 +124,7 @@ function edgeCreateToolClicked() { //edge Creation tool
     edgeCreateTool = !edgeCreateTool;
     let edgeButton = document.getElementById("edgeCreate");
     if (edgeButton.classList.contains("active")) {
-        edgeButton.classList = ""
+        edgeButton.classList.remove("active")
     } else {
         edgeButton.classList.add("active")
     }
