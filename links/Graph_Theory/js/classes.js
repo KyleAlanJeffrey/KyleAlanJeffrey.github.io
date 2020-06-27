@@ -1,4 +1,4 @@
-const NODE_RADIUS = 50;
+const NODE_RADIUS = 35;
 
 function random(low, high, floor) {
     if (floor) {
@@ -43,7 +43,8 @@ class Node {
         this.velx = 0;
         this.vely = 0;
     }
-    update() {
+    update(boundX, boundY) {
+        this.updateVel(boundX, boundY);
         this.nodeElement.style.top = this.y + 'px'
         this.nodeElement.style.left = this.x + 'px'
     }
@@ -79,7 +80,7 @@ class Edge {
         this.node2 = node2;
         var edgeElement = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         edgeElement.setAttribute('x1', node1.x + NODE_RADIUS);
-        edgeElement.setAttribute('y1', node1.y);
+        edgeElement.setAttribute('y1', node1.y + NODE_RADIUS);
         edgeElement.setAttribute('x2', x2);
         edgeElement.setAttribute('y2', y2);
         edgeElement.setAttribute("marker-end", "url(#arrowhead)");
@@ -89,16 +90,16 @@ class Edge {
     }
     updateWithMouse(x2, y2) {
         this.edgeElement.setAttribute('x1', this.node1.x + NODE_RADIUS);
-        this.edgeElement.setAttribute('y1', this.node1.y);
+        this.edgeElement.setAttribute('y1', this.node1.y - NAVBAR_HEIGHT + NODE_RADIUS);
         this.edgeElement.setAttribute('x2', x2);
-        this.edgeElement.setAttribute('y2', y2);
+        this.edgeElement.setAttribute('y2', y2 - NAVBAR_HEIGHT);
 
     }
     update() {
         this.edgeElement.setAttribute('x1', this.node1.x + NODE_RADIUS);
-        this.edgeElement.setAttribute('y1', this.node1.y);
+        this.edgeElement.setAttribute('y1', this.node1.y - NAVBAR_HEIGHT + NODE_RADIUS);
         this.edgeElement.setAttribute('x2', this.node2.x + NODE_RADIUS);
-        this.edgeElement.setAttribute('y2', this.node2.y);
+        this.edgeElement.setAttribute('y2', this.node2.y - NAVBAR_HEIGHT + NODE_RADIUS);
     }
     destroyHTMLElement() {
         let edgeHTML = this.edgeElement;
@@ -108,7 +109,38 @@ class Edge {
 
 }
 
-
+class Toolbar {
+    constructor() {
+        this.nodeCreateTool = false;
+        this.edgeCreateTool = false;
+        this.edgeCreateinProgress = false;
+        this.nodeMoveinProgress = false;
+    }
+    nodeCreateButtonClicked() {
+        $("#edgeCreate").removeClass("button-active");
+        $("#node-dropdown").toggleClass("button-active");
+        $("#nodeCreate").toggleClass("button-active");
+        this.edgeCreateTool = false;
+        this.nodeCreateTool = !this.nodeCreateTool;
+        /* If currently making an edge, delete when edge button clicked */
+        if (this.edgeCreateinProgress) {
+            edgesArray.pop().destroyHTMLElement();
+            this.edgeCreateinProgress = false;
+        }
+    }
+    edgeCreateButtonClicked() {
+        $("#node-dropdown").removeClass("button-active");
+        $("#nodeCreate").removeClass("button-active");
+        $("#edgeCreate").toggleClass("button-active");
+        this.nodeCreateTool = false;
+        this.edgeCreateTool = !this.edgeCreateTool;
+        /* If currently making an edge, delete when edge button clicked */
+        if (this.edgeCreateinProgress) {
+            edgesArray.pop().destroyHTMLElement();
+            this.edgeCreateinProgress = false;
+        }
+    }
+}
 class Queue {
     constructor() {
         this.elements = [];

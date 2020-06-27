@@ -4,6 +4,7 @@ font-family: 'Work Sans', sans-serif;  */
 .navbar{
     /* color: white !important; */
     /* background-color: rgb(0, 73, 97); */
+    z-index: 5;
 }
 
 /* #title{
@@ -16,22 +17,21 @@ body{
     font-family: 'Work Sans', sans-serif !important;
     font-weight: 500 !important;
 }
-
+#toolbar a{
+    cursor: pointer;
+}
 #toolbar button{
     /* margin: 10px; */
     margin-left: 5px;
     margin-right: 5px;
 }
-.active{
+#toolbar button:hover{
+    opacity: .5 !important;
+}
+.button-active{
     background-color: rgb(0, 185, 0) !important;
 }
-#nodeCreate{
-    text-align: center;
-    /* border-radius: 25%; */
-    /* height: 45px;
-    width: 45px; */
-    /* padding: 0; */
-}
+
 .jumbotron{
     height: 93%;
 }

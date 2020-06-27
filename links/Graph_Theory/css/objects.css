@@ -1,7 +1,7 @@
 .node{
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     transition: transform .2s;
     transition: background-color .3s;
     background-color: gold;
@@ -10,9 +10,11 @@
     position: absolute;
 }
 .node p{
-    padding-top: 28%;
+    height: 100%;
+    /* padding-top: 40%; */
     font-size: 30;
     user-select: none;
+    margin: 0;
 }
 .node:hover{
     background-color: rgb(160, 136, 1);
@@ -31,9 +33,11 @@
 }
 .node-discovered{
     background-color: grey;
+    animation: node-placed-anim .5s;
 }
 .node-searched{
     background-color: black;
+    animation: node-placed-anim .5s;
 }
 .edge{
     stroke: red;

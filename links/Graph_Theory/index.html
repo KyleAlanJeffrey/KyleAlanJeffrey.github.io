@@ -22,29 +22,59 @@
         </button>
         <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
             <ul class="navbar-nav w-100 justify-content-start " id="toolbar">
-                <button id="nodeCreate" class="btn btn-md btn-inverse text-white"
-                    onclick="nodeCreateToolClicked()">Nodes</button>
+
+                <!-- Nodes Dropdown Menu -->
+                <div class="btn-group">
+                    <button id="node-dropdown" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nodes
+                    </button>
+                    <div class="dropdown-menu">
+                        <a id="nodeCreate" class="dropdown-item" onclick="toolbar.nodeCreateButtonClicked()">Create
+                            Nodes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Choose Start Node</a>
+                        <a class="dropdown-item" href="#">Choose Destination Node</a>
+                    </div>
+                </div>
                 <button id="edgeCreate" class="btn btn-md btn-inverse text-white"
-                    onclick="edgeCreateToolClicked()">Edges</button>
-                <button id="" class="btn btn-md btn-Danger" onclick="BFSclicked()">RUN BFS</button>
-                <button id="" class="btn btn-md btn-Primary" onclick="nodesArray[0].connect()">Connect</button>
+                    onclick="toolbar.edgeCreateButtonClicked()">Edges</button>
+                <div class="btn-group">
+                    <button id="graph-dropdown" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Utility</button>
+                    <div class="dropdown-menu">
+                        <button id="" class="btn btn-md btn-Danger" onclick="BFSclicked()">RUN BFS from 0</button>
+                        <button id="" class="btn btn-md btn-warning" onclick="nodesArray[0].connect()">Connectify Node 0</button>
+                        <button id="" class="btn btn-md btn-info" onclick="resetNodes()">Clear Node Coloring</button>
+                        <button id="" class="btn btn-md btn-Danger" onclick="clearAllNodes()">Clear Board</button>
+                    </div>
+                </div>
+                <!-- Graph Builder Dropdown menu -->
+                <div class="btn-group">
+                    <button id="graph-dropdown" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Graph Builder</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" onclick="createBasicGrid();">Basic Grid</a>
+                    </div>
+                </div>
+
             </ul>
         </div>
     </nav>
 
     <div class="jumbotron canvas" id="canvas" onclick="canvasClicked();">
         <svg id="svg" height="100%" width="100%">
-            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" />
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="2.5" orient="auto">
+                <polygon points="0 0, 5 2.5, 0 5" />
             </marker>
         </svg>
     </div>
     <script src="js\jquery-3.5.1.js"></script>
     <script src="js/classes.js"></script>
     <script src="js/alogrithms.js"></script>
-    <script src="js/loop.js"></script>
+    <script src="js/animationLoop.js"></script>
     <script src="js/events.js"></script>
-
+    <script src="js/graphBuilder.js"></script>
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
