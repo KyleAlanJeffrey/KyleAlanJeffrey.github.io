@@ -62,7 +62,8 @@ function BFS(bfsObject) {
 class BFS_class {
     constructor(graph, s) {
         $(".node").removeClass("node-placed")
-        this.s = s;
+        this.s = graph.source;
+        this.dest = graph.dest;
         this.n = graph.size;
         this.adj = graph.adjMatrix;
         this.color = [];
@@ -90,7 +91,7 @@ class BFS_class {
         if (!this.q.isEmpty()) {
             this.x = this.q.dequeue();
             this.allNeighborsDiscovered = false;
-        }else{
+        } else {
             this.finished = true;
         }
     }
@@ -99,7 +100,7 @@ class BFS_class {
             this.y = this.adj[this.x].shift();
             if (this.color[this.y] == "white") {
                 this.color[this.y] = "grey";
-                nodesArray[this.y].nodeElement.classList += " node-discovered";
+                nodesArray[this.y].nodeElement.firstChild.classList += " node-animater-discovered";
 
                 this.distance[this.y] = this.distance[this.x] + 1;
 
@@ -111,6 +112,6 @@ class BFS_class {
         }
         this.allNeighborsDiscovered = true;
         this.color[this.x] = "black";
-        nodesArray[this.x].nodeElement.classList += " node-searched";
+        nodesArray[this.x].nodeElement.firstChild.classList += " node-searched";
     }
 }

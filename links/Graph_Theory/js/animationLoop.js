@@ -2,7 +2,6 @@
 //Global Variabales
 let nodesArray = [];
 let edgesArray = [];
-var edgeCreateInProgress = false;
 let graph = new Graph();
 var toolbar = new Toolbar();
 

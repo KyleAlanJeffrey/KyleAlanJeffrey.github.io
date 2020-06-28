@@ -13,6 +13,8 @@ class Graph {
         this.edgeSet = [];
         this.adjMatrix = [];
         this.size = 0;
+        this.source = undefined;
+        this.dest = undefined;
     }
     addVertex() {
         this.vertexSet[this.size] = this.size;
@@ -27,17 +29,25 @@ class Graph {
 
 class Node {
     constructor(x, y, parentElement) {
+        console.log("making Node");
         //make html element
         let nodeElement = document.createElement("div");
+        let nodeAnimater = document.createElement('div');
         let text = document.createElement("p");
+
+        nodeAnimater.classList += " node-animater";
+
         text.innerText = nodesArray.length;
-        this.vertex = nodesArray.length;
-        nodeElement.appendChild(text);
+        nodeElement.appendChild(nodeAnimater);
+        nodeAnimater.appendChild(text);
         nodeElement.classList.add("node");
+        nodeElement.classList.add("node-placed");
+
         parentElement.appendChild(nodeElement);
 
         this.nodeElement = nodeElement;
 
+        this.vertex = nodesArray.length;
         this.x = x;
         this.y = y;
         this.velx = 0;
@@ -61,11 +71,17 @@ class Node {
     destroyHTMLElement() {
         this.nodeElement.parentNode.removeChild(this.nodeElement);
     }
+    edgetoPrev() {
+        if (nodesArray.length < 2) return;
+        let body = document.getElementById("svg");
+
+        edgesArray.push(new Edge(nodesArray[nodesArray.length - 2], this, body));
+    }
     connect() {
         let body = document.getElementById("svg");
         nodesArray.forEach(node => {
             if (this == node) return;
-            edgesArray.push(new Edge(0, 0, this, node, body));
+            edgesArray.push(new Edge(this, node, body));
             graph.addEdge(this.vertex, node.vertex);
         });
 
@@ -73,20 +89,22 @@ class Node {
 }
 
 class Edge {
-    constructor(x2, y2, node1, node2, parentElement) {
-        this.x2 = x2;
-        this.y2 = y2;
+    constructor(node1, node2, parentElement) {
         this.node1 = node1;
         this.node2 = node2;
         var edgeElement = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         edgeElement.setAttribute('x1', node1.x + NODE_RADIUS);
         edgeElement.setAttribute('y1', node1.y + NODE_RADIUS);
-        edgeElement.setAttribute('x2', x2);
-        edgeElement.setAttribute('y2', y2);
+        edgeElement.setAttribute('x2', node1.x);
+        edgeElement.setAttribute('y2', node1.y);
         edgeElement.setAttribute("marker-end", "url(#arrowhead)");
         edgeElement.classList = "edge";
         parentElement.appendChild(edgeElement);
         this.edgeElement = edgeElement;
+
+        if (node2) {
+            graph.addEdge(node1.vertex, node2.vertex);
+        }
     }
     updateWithMouse(x2, y2) {
         this.edgeElement.setAttribute('x1', this.node1.x + NODE_RADIUS);
@@ -94,6 +112,10 @@ class Edge {
         this.edgeElement.setAttribute('x2', x2);
         this.edgeElement.setAttribute('y2', y2 - NAVBAR_HEIGHT);
 
+    }
+    setNode2(node) {
+        this.node2 = node;
+        graph.addEdge(this.node1.vertex, this.node2.vertex);
     }
     update() {
         this.edgeElement.setAttribute('x1', this.node1.x + NODE_RADIUS);
@@ -139,6 +161,10 @@ class Toolbar {
             edgesArray.pop().destroyHTMLElement();
             this.edgeCreateinProgress = false;
         }
+    }
+    bfsClicked() {
+        algorithmConfig.algorithm = "bfs";
+        $("#visualize").text("Visualize Algorithm");
     }
 }
 class Queue {
