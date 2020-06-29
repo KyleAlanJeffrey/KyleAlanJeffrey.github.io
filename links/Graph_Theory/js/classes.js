@@ -139,9 +139,8 @@ class Toolbar {
         this.nodeMoveinProgress = false;
     }
     nodeCreateButtonClicked() {
-        $("#edgeCreate").removeClass("button-active");
-        $("#node-dropdown").toggleClass("button-active");
-        $("#nodeCreate").toggleClass("button-active");
+        $("#edgeCreate").removeClass("button-active-edge");
+        $("#nodeCreate").toggleClass("button-active-node");
         this.edgeCreateTool = false;
         this.nodeCreateTool = !this.nodeCreateTool;
         /* If currently making an edge, delete when edge button clicked */
@@ -151,9 +150,8 @@ class Toolbar {
         }
     }
     edgeCreateButtonClicked() {
-        $("#node-dropdown").removeClass("button-active");
-        $("#nodeCreate").removeClass("button-active");
-        $("#edgeCreate").toggleClass("button-active");
+        $("#nodeCreate").removeClass("button-active-node");
+        $("#edgeCreate").toggleClass("button-active-edge");
         this.nodeCreateTool = false;
         this.edgeCreateTool = !this.edgeCreateTool;
         /* If currently making an edge, delete when edge button clicked */
@@ -162,9 +160,42 @@ class Toolbar {
             this.edgeCreateinProgress = false;
         }
     }
+    deactivateCreateButtons(){
+        $("#nodeCreate").removeClass("button-active-node");
+        $("#edgeCreate").removeClass("button-active-edge");
+        this.nodeCreateTool = false;
+        this.edgeCreateTool = false;
+        this.nodeMoveinProgress = false;
+        if(this.edgeCreateinProgress){
+            deleteLastEdge()
+        }
+        this.edgeCreateinProgress = false;
+    }
     bfsClicked() {
+        this.deactivateCreateButtons();
         algorithmConfig.algorithm = "bfs";
         $("#visualize").text("Visualize Algorithm");
+        $("#algorithm").text("Algorithm: BFS");
+
+    }
+    algorithmSpeedClicked(btn) {
+        this.deactivateCreateButtons();
+        let text = btn.innerText;
+        $("#speed-dropdown").text("Speed: "+ text);
+        switch (text) {
+            case "Usain Bolt":
+                algorithmConfig.speed = 5;
+                break;
+            case "Fast":
+                algorithmConfig.speed = 50;
+                break;
+            case "Medium":
+                algorithmConfig.speed = 200;
+                break;
+            case "Slow":
+                algorithmConfig.speed = 500;
+                break;
+        }
     }
 }
 class Queue {

@@ -28,8 +28,10 @@
                 <button id="edgeCreate" class="btn btn-md btn-danger m-1"
                     onclick="toolbar.edgeCreateButtonClicked()">Edges</button>
 
+                <button id="" class="btn btn-md btn-inverse text-white" onclick="clearNodesandEdges()">Clear Board</button>
+                
                 <!-- Nodes Dropdown Menu -->
-                <div class="btn-group">
+                <!-- <div class="btn-group">
                     <button id="node-dropdown" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Nodes
@@ -39,10 +41,10 @@
                         <a class="dropdown-item" href="#">Choose Start Node</a>
                         <a class="dropdown-item" href="#">Choose Destination Node</a>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Utility Dropdown Menu -->
-                <div class="btn-group">
+                <!-- <div class="btn-group">
                     <button id="" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Utility</button>
                     <div class="dropdown-menu">
@@ -51,14 +53,14 @@
                         <button id="" class="btn btn-md btn-info" onclick="resetNodes()">Clear Node Coloring</button>
                         <button id="" class="btn btn-md btn-Danger" onclick="clearNodesandEdges()">Clear Board</button>
                     </div>
-                </div>
+                </div> -->
 
                 <button id="visualize" class="btn btn-md btn-success" onclick="runAlgorithm();">Visualize
                     Algorithm</button>
 
                 <!-- Algorithms Dropdown menu -->
                 <div class="btn-group">
-                    <button id="" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
+                    <button id="algorithm" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Algorithms: None</button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" onclick="toolbar.bfsClicked()">BFS</a>
@@ -76,12 +78,13 @@
 
                 <!-- Speed Dropdown Menu -->
                 <div class="btn-group">
-                    <button id="graph-dropdown" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
+                    <button id="speed-dropdown" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Speed: Fast</button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" onclick="algorithmSpeed=50">Fast</a>
-                        <a class="dropdown-item" onclick="algorithmSpeed=150">Medium</a>
-                        <a class="dropdown-item" onclick="algorithmSpeed=500">Slow</a>
+                        <a class="dropdown-item" onclick="toolbar.algorithmSpeedClicked(this)">Usain Bolt</a>
+                        <a class="dropdown-item" onclick="toolbar.algorithmSpeedClicked(this)">Fast</a>
+                        <a class="dropdown-item" onclick="toolbar.algorithmSpeedClicked(this)">Medium</a>
+                        <a class="dropdown-item" onclick="toolbar.algorithmSpeedClicked(this)">Slow</a>
                     </div>
                 </div>
 
@@ -102,7 +105,7 @@
 
             </div>
             <div class="col-md-3">
-                
+
             </div>
             <svg id="svg" height="100%" width="100%">
                 <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="2.5" orient="auto">

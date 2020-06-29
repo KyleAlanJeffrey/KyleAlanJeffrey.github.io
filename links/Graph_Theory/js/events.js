@@ -8,7 +8,7 @@ var algorithmConfig = {
     algorithm: "",
     speed: 50,
     cssSpeed: "1s",
-    startNode : undefined,
+    startNode: 15,
     destNode: undefined
 }
 document.body.onmousemove = mouseMove;
@@ -17,7 +17,8 @@ var bfsObj;
 
 function runAlgorithm() {
     if (algorithmConfig.algorithm == "bfs") {
-        bfsObj = new BFS_class(graph, 0);
+        $("#visualize").toggleClass("visualize-active");
+        bfsObj = new BFS_class(graph, algorithmConfig.startNode);
         bfsInterval = setInterval(() => { BFS(bfsObj) }, algorithmConfig.speed);
     } else {
         console.log("No Algorithm Selected!");
@@ -52,7 +53,7 @@ function nodeClicked(node) {
         currentEdge = edge;
         edgesArray.push(edge);
 
-        /* Assign Second Node of Current Edge to This node*/
+        /* Assign Second Node of Current Edge to "this" node*/
     } else if (toolbar.edgeCreateinProgress) {
         toolbar.edgeCreateinProgress = false;
 
@@ -61,8 +62,7 @@ function nodeClicked(node) {
         let edgeWithSameOrigin = edgeWithSameTerminus.filter(edge => edge.node1 == currentEdge.node1);
         if (edgeWithSameOrigin[0]) {
             console.log("Can't make duplicate Edges")
-            currentEdge.destroyHTMLElement();
-            edgesArray.pop();
+            deleteLastEdge();
         } else {
             currentEdge.setNode2(node);
         }
@@ -71,6 +71,11 @@ function nodeClicked(node) {
     }
 }
 
+
+
+/*---------------------------
+        GLOBAL FUNCTIONS
+-----------------------------*/
 function nodeCreate(x, y) {
     let body = document.getElementById("canvas");
     let node = new Node(x - NODE_RADIUS, y - NODE_RADIUS, body);
@@ -86,4 +91,10 @@ function clearNodesandEdges() {
     nodesArray.forEach(node => node.destroyHTMLElement());
     edgesArray = [];
     nodesArray = [];
+}
+function deleteLastEdge() {
+    if (edgesArray.length == 0) return;
+    edgesArray[edgesArray.length - 1].destroyHTMLElement();
+    edgesArray.pop();
+
 }

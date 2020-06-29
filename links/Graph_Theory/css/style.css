@@ -16,11 +16,23 @@ body {
     font-weight: 500 !important;
 }
 
-.button-active{
+/* .btn-warning.focus, .btn-warning:focus {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    box-shadow: none !important;
+}Z */
+
+.button-active-node {
     color: #212529;
     background-color: #e0a800;
     border-color: #d39e00;
-    box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
+    box-shadow: 0 0 0 0.2rem rgba(222, 170, 12, .5);
+}
+
+.button-active-edge {
+    background-color: #dc3545;
+    border-color: #bd2130;
+    box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, .5);
 }
 
 #toolbar button:hover {
@@ -36,8 +48,13 @@ body {
 #canvas {
     background-color: white !important;
 }
-#notification-board{
+
+#notification-board {
     position: absolute;
     top: 62px;
     left: 0;
+}
+
+.visualize-active {
+    background-color: rgb(255, 0, 0) !important;
 }
