@@ -47,6 +47,8 @@ class Node {
 
         this.nodeElement = nodeElement;
 
+        this.destNode = false;
+        this.startNode = false;
         this.vertex = nodesArray.length;
         this.x = x;
         this.y = y;
@@ -71,11 +73,15 @@ class Node {
     destroyHTMLElement() {
         this.nodeElement.parentNode.removeChild(this.nodeElement);
     }
-    edgetoPrev() {
+    edgetoPrev(directed) {
         if (nodesArray.length < 2) return;
         let body = document.getElementById("svg");
-
-        edgesArray.push(new Edge(nodesArray[nodesArray.length - 2], this, body));
+        if (directed) {
+            edgesArray.push(new Edge(nodesArray[nodesArray.length - 2], this, body));
+        } else {
+            edgesArray.push(new Edge(nodesArray[nodesArray.length - 2], this, body));
+            edgesArray.push(new Edge(this, nodesArray[nodesArray.length - 2], body));
+        }
     }
     connect() {
         let body = document.getElementById("svg");
@@ -133,16 +139,21 @@ class Edge {
 
 class Toolbar {
     constructor() {
+        this.moveStartNode = false;
+        this.moveDestNode = false;
         this.nodeCreateTool = false;
         this.edgeCreateTool = false;
         this.edgeCreateinProgress = false;
         this.nodeMoveinProgress = false;
     }
     nodeCreateButtonClicked() {
+        $("#edge-tool-warning").css("display", "none");
+        $("#node-tool-warning").toggle();
         $("#edgeCreate").removeClass("button-active-edge");
         $("#nodeCreate").toggleClass("button-active-node");
         this.edgeCreateTool = false;
         this.nodeCreateTool = !this.nodeCreateTool;
+
         /* If currently making an edge, delete when edge button clicked */
         if (this.edgeCreateinProgress) {
             edgesArray.pop().destroyHTMLElement();
@@ -150,23 +161,28 @@ class Toolbar {
         }
     }
     edgeCreateButtonClicked() {
+        $("#node-tool-warning").css("display", "none"); //if node create warning active, disable
+        $("#edge-tool-warning").toggle();
         $("#nodeCreate").removeClass("button-active-node");
         $("#edgeCreate").toggleClass("button-active-edge");
         this.nodeCreateTool = false;
         this.edgeCreateTool = !this.edgeCreateTool;
+
         /* If currently making an edge, delete when edge button clicked */
         if (this.edgeCreateinProgress) {
             edgesArray.pop().destroyHTMLElement();
             this.edgeCreateinProgress = false;
         }
     }
-    deactivateCreateButtons(){
+    deactivateCreateButtons() {
+        $("#node-tool-warning").css("display", "none"); 
+        $("#edge-tool-warning").css("display", "none"); 
         $("#nodeCreate").removeClass("button-active-node");
         $("#edgeCreate").removeClass("button-active-edge");
         this.nodeCreateTool = false;
         this.edgeCreateTool = false;
         this.nodeMoveinProgress = false;
-        if(this.edgeCreateinProgress){
+        if (this.edgeCreateinProgress) {
             deleteLastEdge()
         }
         this.edgeCreateinProgress = false;
@@ -181,7 +197,7 @@ class Toolbar {
     algorithmSpeedClicked(btn) {
         this.deactivateCreateButtons();
         let text = btn.innerText;
-        $("#speed-dropdown").text("Speed: "+ text);
+        $("#speed-dropdown").text("Speed: " + text);
         switch (text) {
             case "Usain Bolt":
                 algorithmConfig.speed = 5;

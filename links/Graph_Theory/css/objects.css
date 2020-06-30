@@ -4,7 +4,10 @@
                 1. Nodes 
                 2. Edges
 -------------------------------------------------- */
-
+:root{
+    --node-width: 70px;
+    --node-height: 70px;
+}
 
 /* -----------------------------------------------
 NODE CONFIG
@@ -53,20 +56,50 @@ NODE CONFIG
     border: green dashed 4px;
 }
 .start-node{
-    background-image: url("../img/start.png");
+    background-image: url("../img/start.png") !important;
+    background-size: cover;
+    /* background-color: white; */
 }
+.start-node p{
+    opacity: 0;
+}
+.dest-node{
+    background-image: url("../img/end.png") !important;
+    background-size: cover;
+    /* background-color: white; */
+}
+.dest-node p{
+    opacity: 0;
+}
+#start-node-move{
+    background-image: url("../img/start.png") !important;
+    background-size: cover;
+    display: none;
+    width: var(--node-width);
+    height: var(--node-height);
+    position: absolute;
+}
+#dest-node-move{
+    background-image: url("../img/end.png") !important;
+    background-size: cover;
+    display: none;
+    width: var(--node-width);
+    height: var(--node-height);
+    position: absolute;
+    top: 75;
+}
+
 /* Node Animations */
 @keyframes node-searched-anim {
     0% {
-        transform: scale(.3);
-        background-color: gold;
+        background-color: lightblue;
     }
     50% {
-        background-color: rgb(165, 140, 0);
+        background-color: rgb(106, 173, 196);
     }
     75% {
         transform: scale(1.2);
-        background-color: rgb(80, 68, 0);
+        background-color: rgb(20, 74, 92);
     }
     100% {
         transform: scale(1.0);

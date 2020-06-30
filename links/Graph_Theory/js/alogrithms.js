@@ -93,7 +93,6 @@ class BFS_class {
             this.allNeighborsDiscovered = false;
         } else {
             this.finished = true;
-            toolbar.visualize(false);
         }
     }
     findNeighbor() {

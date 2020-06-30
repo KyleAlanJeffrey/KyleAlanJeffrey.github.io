@@ -92,9 +92,13 @@
         </div>
     </nav>
 
-    <div class="jumbotron">
+    <div class="jumbotron ">
         <div class="row-fluid canvas" id="canvas" style="height: 100%;" onclick="canvasClicked();">
+            <div id="start-node-move"></div> <!-- For use when  moving the start node -->            
+            <div id="dest-node-move"></div> <!-- For use when  moving the start node -->            
             <div class="col-md-3 text-danger" id="notification-board">
+                <h2 id="edge-tool-warning" style="display: none;">Edge Create Tool Active</h2>
+                <h2 id="node-tool-warning" class="text-warning" style="display: none;">Node Create Tool Active</h2>
                 <!-- <h3>Warning:</h3>
                 <h4>Select a Destination Node</h4>
                 <h4>Select a Start Node</h4>
