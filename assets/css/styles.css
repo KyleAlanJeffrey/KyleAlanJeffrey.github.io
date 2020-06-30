@@ -612,8 +612,8 @@
 }
 .cnt-left .social-link{
     margin-top: 32px;
-    margin-left: 38%;
-    margin-right: 40%;
+    /* margin-left: 38%; */
+    /* margin-right: 40%; */
 }
 .contact-form form input,
 .contact-form form textarea{
