@@ -22,6 +22,9 @@ NODE CONFIG
     text-align: center;
     position: absolute;
 }
+.node span{
+    display: none;
+}
 .node:hover {
     background-color: rgb(160, 136, 1);
     cursor: grab;
