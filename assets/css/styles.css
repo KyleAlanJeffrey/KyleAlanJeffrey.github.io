@@ -582,30 +582,18 @@
     opacity: 1;
 }
 
-@media screen and (min-width: 768px) {
-    .prt-item-overlay {
-        position: absolute;
-        /* margin:0 60px 60px 0; */
-        width: 350px;
-        height: 350px;
-        background-color: #464444;
-        opacity: 0;
-        text-align: center;
-        transition: opacity 1s;
-    }
+.prt-item-overlay {
+    position: absolute;
+    width: 93%;
+    height: 93%;
+    margin: inherit;
+    padding: inherit;
+    background-color: #464444;
+    opacity: 0;
+    text-align: center;
+    transition: opacity 1s;
 }
-@media screen and (max-width: 768px) {
-    .prt-item-overlay {
-        position: absolute;
-        /* margin:0 60px 60px 0; */
-        width: 306px;
-        height: 306px;
-        background-color: #464444;
-        opacity: 0;
-        text-align: center;
-        transition: opacity 1s;
-    }
-}
+
 .prt-item-overlay h2 {
     font-family: 'Montserrat', sans-serif;
     color: white;
