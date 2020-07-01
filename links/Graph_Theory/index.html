@@ -14,7 +14,7 @@
 <!-- <button id="edgeCreate" class="btn" > Edge Create</button> -->
 <!--  <a id="title" class="nav-link" href="index.html">Graphing Visualizer</a> -->
 
-<body style="overflow: hidden;">
+<body style="">
     <nav class="navbar text-white bg-dark navbar-expand-md" id="navbar">
         <a href="index.html" class="navbar-brand d-flex w-25 mr-auto text-white">Graphing Visualizer</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
@@ -27,33 +27,11 @@
                     onclick="toolbar.nodeCreateButtonClicked()">Nodes</button>
                 <button id="edgeCreate" class="btn btn-md btn-danger m-1"
                     onclick="toolbar.edgeCreateButtonClicked()">Edges</button>
-
-                <button id="" class="btn btn-md btn-inverse text-white" onclick="clearNodesandEdges()">Clear Board</button>
-                
-                <!-- Nodes Dropdown Menu -->
-                <!-- <div class="btn-group">
-                    <button id="node-dropdown" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Nodes
-                    </button>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Choose Start Node</a>
-                        <a class="dropdown-item" href="#">Choose Destination Node</a>
-                    </div>
-                </div> -->
-
-                <!-- Utility Dropdown Menu -->
-                <!-- <div class="btn-group">
-                    <button id="" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Utility</button>
-                    <div class="dropdown-menu">
-                        <button id="" class="btn btn-md btn-warning" onclick="nodesArray[0].connect()">Connectify Node
-                            0</button>
-                        <button id="" class="btn btn-md btn-info" onclick="resetNodes()">Clear Node Coloring</button>
-                        <button id="" class="btn btn-md btn-Danger" onclick="clearNodesandEdges()">Clear Board</button>
-                    </div>
-                </div> -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="edge-checkbox">
+                </div>
+                <button id="" class="btn btn-md btn-inverse text-white" onclick="clearNodesandEdges()">Clear
+                    Board</button>
 
                 <button id="visualize" class="btn btn-md btn-success" onclick="runAlgorithm();">Visualize
                     Algorithm</button>
@@ -92,31 +70,34 @@
         </div>
     </nav>
 
-    <div class="jumbotron ">
-        <div class="row-fluid canvas" id="canvas" style="height: 100%;" onclick="canvasClicked();">
-            <div id="start-node-move"></div> <!-- For use when  moving the start node -->            
-            <div id="dest-node-move"></div> <!-- For use when  moving the start node -->            
-            <div class="col-md-3 text-danger" id="notification-board">
-                <h2 id="edge-tool-warning" style="display: none;">Edge Create Tool Active</h2>
-                <h2 id="node-tool-warning" class="text-warning" style="display: none;">Node Create Tool Active</h2>
-                <!-- <h3>Warning:</h3>
-                <h4>Select a Destination Node</h4>
-                <h4>Select a Start Node</h4>
-                <h4>Select a Start Node</h4>
-                <h4>Select a Start Node</h4> -->
+    <div class="jumbotron">
+        <div class="container-fluid">
+            <!-- Information Panel -->
+            <div class="d-flex flex-column justify-content-start  p-3" id="info-panel">
+                <div id="info-panel-sticky">INFO</div>
+                <div class="item py-3">
+                    <img src="img/start.png" alt="" srcset="" style="width: 60%;">
+                    <span>Starting Node</span>
+                </div>
+                <div class="item py-3">
+                    <img src="img/end.png" alt="" style="width: 60%;">
+                    <span>Destination Node</span>
+                </div>
             </div>
-            <div class="col-md-6">
+            <div class="row canvas" id="canvas" style="height: 100%;" onclick="canvasClicked();">
+                <div id="start-node-move"></div> <!-- For use when  moving the start node -->
+                <div id="dest-node-move"></div> <!-- For use when  moving the destination node -->
+                <div class="col-md-3 text-danger" id="notification-board">
+                    <h2 id="edge-tool-warning" style="display: none;">Edge Create Tool Active</h2>
+                    <h2 id="node-tool-warning" class="text-warning" style="display: none;">Node Create Tool Active</h2>
+                </div>
+                <svg id="svg">
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="2.5" orient="auto">
+                        <polygon points="0 0, 5 2.5, 0 5" />
+                    </marker>
+                </svg>
 
             </div>
-            <div class="col-md-3">
-
-            </div>
-            <svg id="svg" height="100%" width="100%">
-                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="2.5" orient="auto">
-                    <polygon points="0 0, 5 2.5, 0 5" />
-                </marker>
-            </svg>
-
         </div>
     </div>
     <script src="js\jquery-3.5.1.js"></script>

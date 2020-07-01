@@ -22,22 +22,15 @@ NODE CONFIG
     text-align: center;
     position: absolute;
 }
-.node p {
-    height: 100%;
-    /* padding-top: 40%; */
-    font-size: 30;
-    user-select: none;
-    margin: 0;
-    padding: 10px 0;
-}
-
 .node:hover {
     background-color: rgb(160, 136, 1);
-    cursor: pointer;
+    cursor: grab;
     transform: scale(1.3);
 }
 .node-animater {
     border-radius: 50%;
+    width: 100%;
+    height: 100%;
 }
 .node-placed {
     animation: node-placed-anim .5s;
@@ -60,16 +53,10 @@ NODE CONFIG
     background-size: cover;
     /* background-color: white; */
 }
-.start-node p{
-    opacity: 0;
-}
 .dest-node{
     background-image: url("../img/end.png") !important;
     background-size: cover;
     /* background-color: white; */
-}
-.dest-node p{
-    opacity: 0;
 }
 #start-node-move{
     background-image: url("../img/start.png") !important;
@@ -78,6 +65,11 @@ NODE CONFIG
     width: var(--node-width);
     height: var(--node-height);
     position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+#start-node-move:hover{
+    cursor: move;
 }
 #dest-node-move{
     background-image: url("../img/end.png") !important;
@@ -87,8 +79,13 @@ NODE CONFIG
     height: var(--node-height);
     position: absolute;
     top: 75;
+    pointer-events: none;
+    z-index: 1;
 }
-
+.path-found{
+    animation: path-found-anim .5s;
+    background-color: var(--success);
+}
 /* Node Animations */
 @keyframes node-searched-anim {
     0% {
@@ -131,7 +128,14 @@ NODE CONFIG
         background-color: gold;
     }
 }
-
+@keyframes path-found-anim{
+    from{
+        background-color: rgba(0, 128, 0, 0);
+    }
+    to{
+        background-color:  var(--success);
+        transform: rotateX(360deg);}
+}
 
 /* -----------------------------------------------
 EDGE CONFIG

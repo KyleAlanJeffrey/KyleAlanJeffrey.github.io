@@ -4,22 +4,10 @@ var mouseY = 0;
 var currentNode = undefined;
 var currentEdge = undefined;
 
-var algorithmConfig = {
-    algorithm: "",
-    speed: 50,
-    cssSpeed: "1s",
-    startNode: 0,
-    startNodeMoveElement: document.getElementById("start-node-move"),
-    destNode: 0,
-    destNodeMoveElement: document.getElementById("dest-node-move")
-}
 
 /* DOM Events */
 document.body.onmousemove = mouseMove;
 document.body.onmouseup = mouseUpOnCanvas;
-
-var bfsObj;
-
 
 function runAlgorithm() {
     if (nodesArray.length == 0) {
@@ -27,8 +15,10 @@ function runAlgorithm() {
         return;
     }
     if (algorithmConfig.algorithm == "bfs") {
-        bfsObj = new BFS_class(graph, algorithmConfig.startNode);
-        bfsInterval = setInterval(() => { BFS(bfsObj) }, algorithmConfig.speed);
+        console.log("here")
+        resetNodes();
+        bfsObj = new BFS_class(graph);
+        algorithmConfig.intervalObj = setInterval(() => { BFS(bfsObj) }, algorithmConfig.speed);
     } else {
         console.log("No Algorithm Selected!");
         $("#visualize").text("Select an Algorithm!");
@@ -44,12 +34,12 @@ function mouseMove(e) {
     } else if (toolbar.moveDestNode || toolbar.moveStartNode) {
         if (toolbar.moveStartNode) {
             algorithmConfig.startNodeMoveElement.style.display = "block";
-            algorithmConfig.startNodeMoveElement.style.top = mouseY + "px";
-            algorithmConfig.startNodeMoveElement.style.left = mouseX + "px";
+            algorithmConfig.startNodeMoveElement.style.top = mouseY - NODE_RADIUS + "px";
+            algorithmConfig.startNodeMoveElement.style.left = mouseX - NODE_RADIUS + "px";
         } else {
             algorithmConfig.destNodeMoveElement.style.display = "block";
-            algorithmConfig.destNodeMoveElement.style.top = mouseY + "px";
-            algorithmConfig.destNodeMoveElement.style.left = mouseX + "px";
+            algorithmConfig.destNodeMoveElement.style.top = mouseY - NODE_RADIUS + "px";
+            algorithmConfig.destNodeMoveElement.style.left = mouseX - NODE_RADIUS + "px";
         }
     }
 }
@@ -60,15 +50,10 @@ function mouseUpOnCanvas(e) {
         deleteLastEdge();
         /* RESET START OR END NODE TO PREVIOUS NODE IF RELEASED ON CANVAS*/
     } else if (toolbar.moveStartNode || toolbar.moveDestNode) {
-        //reset last node start was and hide the moving start node element
         if (toolbar.moveStartNode) {
-            $("#start-node-move").hide();
-            nodesArray[algorithmConfig.startNode].nodeElement.classList += " start-node";
-            toolbar.moveStartNode = false;
+            setStartNode(nodesArray[graph.source]);
         } else {
-            $("#dest-node-move").hide();
-            nodesArray[algorithmConfig.destNode].nodeElement.classList += " dest-node";
-            toolbar.moveDestNode = false;
+            setDestNode(nodesArray[graph.dest]);
         }
     }
 }
@@ -98,20 +83,11 @@ function nodeClickedUp(node) {
         /* If currently moving the start or end node, set to this current node */
     } else if (toolbar.moveStartNode || toolbar.moveDestNode) {
         if (toolbar.moveStartNode) {
-            nodesArray[algorithmConfig.startNode].startNode = false; //Remove last node as start node
-            node.startNode = true;
-            algorithmConfig.startNode = node.vertex;
-            node.nodeElement.classList += " start-node";
-            $("#start-node-move").toggle();
-            toolbar.moveStartNode = false;
+            nodesArray[graph.source].startNode = false; //Remove last node as start node
+            setStartNode(node);
         } else {
-            nodesArray[algorithmConfig.destNode].destNode = false; //Remove last node as start node
-            node.destNode = true;
-            algorithmConfig.destNode = node.vertex;
-            node.nodeElement.classList += " dest-node";
-            $("#dest-node-move").toggle();
-            toolbar.moveDesttNode = false;
-
+            nodesArray[graph.dest].destNode = false; //Remove last node as dest node
+            setDestNode(node);
         }
     }
 }
@@ -165,15 +141,27 @@ function nodeCreate(x, y) {
     graph.addVertex();
 }
 function setStartNode(node) {
+    console.log("Changed start node to " + node.vertex);
+
+    $("#start-node-move").hide();
+    node.startNode = true;
     node.nodeElement.classList += " start-node";
-    algorithmConfig.startNode = node.vertex;
+    graph.source = node.vertex;
+    toolbar.moveStartNode = false;
 }
 function setDestNode(node) {
+    console.log("Changed destination node to " + node.vertex);
+
+    node.destNode = true;
+    $("#dest-node-move").hide();
     node.nodeElement.classList += " dest-node";
-    algorithmConfig.destNode = node.vertex;
+    graph.dest = node.vertex;
+    toolbar.moveDestNode = false;
 }
 function resetNodes() {
-    $(".node").removeClass("node-searched node-discovered")
+    $(".node").removeClass("node-searched node-animater-discovered path-found");
+    $(".node-animater").removeClass("node-searched node-animater-discovered");
+
 }
 function clearNodesandEdges() {
     edgesArray.forEach(edge => edge.destroyHTMLElement());

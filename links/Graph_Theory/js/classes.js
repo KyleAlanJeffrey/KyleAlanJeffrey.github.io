@@ -33,7 +33,7 @@ class Node {
         //make html element
         let nodeElement = document.createElement("div");
         let nodeAnimater = document.createElement('div');
-        let text = document.createElement("p");
+        let text = document.createElement("span");
 
         nodeAnimater.classList += " node-animater";
 
@@ -42,6 +42,7 @@ class Node {
         nodeAnimater.appendChild(text);
         nodeElement.classList.add("node");
         nodeElement.classList.add("node-placed");
+        setTimeout(function () { nodeElement.classList.remove("node-placed") }, 2000);
 
         parentElement.appendChild(nodeElement);
 
@@ -145,6 +146,7 @@ class Toolbar {
         this.edgeCreateTool = false;
         this.edgeCreateinProgress = false;
         this.nodeMoveinProgress = false;
+        this.undirectedEdges = false;
     }
     nodeCreateButtonClicked() {
         $("#edge-tool-warning").css("display", "none");
@@ -175,8 +177,8 @@ class Toolbar {
         }
     }
     deactivateCreateButtons() {
-        $("#node-tool-warning").css("display", "none"); 
-        $("#edge-tool-warning").css("display", "none"); 
+        $("#node-tool-warning").css("display", "none");
+        $("#edge-tool-warning").css("display", "none");
         $("#nodeCreate").removeClass("button-active-node");
         $("#edgeCreate").removeClass("button-active-edge");
         this.nodeCreateTool = false;
