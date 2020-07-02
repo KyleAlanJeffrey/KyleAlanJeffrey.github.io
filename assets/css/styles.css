@@ -582,25 +582,39 @@
     opacity: 1;
 }
 
-.prt-item-overlay {
-    position: absolute;
-    width: 93%;
-    height: 93%;
-    margin: inherit;
-    padding: inherit;
-    background-color: #464444;
-    opacity: 0;
-    text-align: center;
-    transition: opacity 1s;
-}
-
 .prt-item-overlay h2 {
     font-family: 'Montserrat', sans-serif;
     color: white;
 }
+/* For SMALL SCREEN */
+@media only screen and (min-width: 0) {
+    .prt-item-overlay {
+        position: absolute;
+        width: 93%;
+        height: 93%;
+        margin: inherit;
+        padding: inherit;
+        background-color: #464444;
+        opacity: 1;
+        text-align: center;
+    }
+}
 
-.prt-item-overlay:hover {
-    opacity: 1;
+@media only screen and (min-width: 768px) {
+    .prt-item-overlay {
+        position: absolute;
+        width: 93%;
+        height: 93%;
+        margin: inherit;
+        padding: inherit;
+        background-color: #464444;
+        opacity: 0;
+        text-align: center;
+        transition: opacity 1s;
+    }
+    .prt-item-overlay:hover {
+        opacity: 1;
+    }
 }
 
 .prt-item {
