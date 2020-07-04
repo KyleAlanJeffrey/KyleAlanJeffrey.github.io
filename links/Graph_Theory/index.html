@@ -10,9 +10,6 @@
 
     <title>Graphing</title>
 </head>
-<!-- <a id="nodeCreate" onclick="nodeCreateToolClicked()">Node Create</a> -->
-<!-- <button id="edgeCreate" class="btn" > Edge Create</button> -->
-<!--  <a id="title" class="nav-link" href="index.html">Graphing Visualizer</a> -->
 
 <body style="">
     <nav class="navbar text-white bg-dark navbar-expand-md" id="navbar">
@@ -41,7 +38,8 @@
                     <button id="algorithm" type="button" class="btn btn-md btn-inverse text-white dropdown-toggle"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Algorithms: None</button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" onclick="toolbar.bfsClicked()">BFS</a>
+                        <a class="dropdown-item" onclick="toolbar.algorithmClicked(this)">BFS</a>
+                        <a class="dropdown-item" onclick="toolbar.algorithmClicked(this)">DFS</a>
                     </div>
                 </div>
 

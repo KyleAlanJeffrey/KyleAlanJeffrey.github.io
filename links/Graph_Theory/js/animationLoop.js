@@ -5,15 +5,31 @@ let edgesArray = [];
 let graph = new Graph();
 var toolbar = new Toolbar();
 
-var svgElement = document.getElementById("svg");
-let canvas = document.getElementById("canvas");
-const WIDTH = canvas.clientWidth;
-const HEIGHT = canvas.clientHeight;
-const NAVBAR_HEIGHT = document.getElementById("navbar").clientHeight;
-const NAVBAR_WIDTH = document.getElementById("navbar").clientWidth;
+const svgElement = document.getElementById("svg");
+const canvas = document.getElementById("canvas");
+const jumbotron = document.getElementsByClassName('jumbotron');
+const infoPanel = document.getElementById('info-panel');
+const Navbar = document.getElementById("navbar");
+const root = document.documentElement;
 
-// Start Animation Loop
-window.requestAnimationFrame(loop)
+let WIDTH = canvas.clientWidth;
+let HEIGHT = canvas.clientHeight;
+let NAVBAR_HEIGHT = Navbar.clientHeight;
+let NAVBAR_WIDTH = Navbar.clientWidth;
+
+$(document).ready(() => {
+    // Start Animation Loop
+    window.requestAnimationFrame(loop);
+
+    setInterval(() => {
+        NAVBAR_HEIGHT = Navbar.clientHeight;
+        HEIGHT = window.innerHeight - NAVBAR_HEIGHT;
+        WIDTH = window.innerWidth;
+        infoPanel.style.setProperty('height', HEIGHT);
+        jumbotron[0].style.setProperty('height', HEIGHT);
+        svgElement.style.setProperty('height', HEIGHT)
+    }, 500);
+});
 
 function loop() {
 

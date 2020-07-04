@@ -34,9 +34,8 @@ body {
 }
 
 .jumbotron {
-    height: 93%;
     padding: 0 !important;
-    margin: 0;
+    margin: 0 !important;
 }
 
 #canvas {

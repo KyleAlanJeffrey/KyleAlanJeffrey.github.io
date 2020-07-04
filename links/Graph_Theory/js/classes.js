@@ -23,7 +23,17 @@ class Graph {
     } addEdge(n1, n2) {
         console.log(`Added edge: ${n1},${n2}`);
         this.adjMatrix[n1].push(n2);
-
+        this.edgeSet.push(`${n1},${n2}`);
+    }
+    createAdjMatrix() {
+        let adj = [];
+        let i = 0;
+        this.adjMatrix.forEach((adjList) => {
+            adj[i] = [];
+            adj[i] = adjList.slice()
+            i++;
+        })
+        return adj;
     }
 }
 
@@ -134,9 +144,39 @@ class Edge {
         let edgeHTML = this.edgeElement;
         edgeHTML.parentNode.removeChild(edgeHTML);
     }
+    static deletedUnwantedEdges(node) {
+        const n1 = currentEdge.node1.vertex;
+        const n2 = node.vertex;
+        if (n1 == n2) {
+            deleteLastEdge();
+            return;
+        }
 
+        let duplEdge = false;
+        graph.edgeSet.forEach(edge => {
+            const nodes = edge.split(',');
+            if (n1 == nodes[0] && n2 == nodes[1]) {
+                console.log("Deleting Duplicate Edge");
+                duplEdge = true;
+                deleteLastEdge();
+            }
+        });
+        if (!duplEdge) {
+            currentEdge.setNode2(node);
+        }
+    }
+    // let edgeWithSameTerminus = edgesArray.filter(edge => edge.node2 == node); //find edges with same node2
+    // let edgeWithSameOrigin = edgeWithSameTerminus.filter(edge => edge.node1 == currentEdge.node1);
+    // if (edgeWithSameOrigin[0]) {
+    //     console.log("Can't make duplicate Edges")
+    //     deleteLastEdge();
+    // } else {
+    //     currentEdge.setNode2(node);
 
+    // }
 }
+
+
 
 class Toolbar {
     constructor() {
@@ -189,11 +229,21 @@ class Toolbar {
         }
         this.edgeCreateinProgress = false;
     }
-    bfsClicked() {
+    algorithmClicked(button) {
         this.deactivateCreateButtons();
-        algorithmConfig.algorithm = "bfs";
         $("#visualize").text("Visualize Algorithm");
-        $("#algorithm").text("Algorithm: BFS");
+        switch (button.innerText) {
+            case "BFS": {
+                algorithmConfig.algorithm = "bfs";
+                $("#algorithm").text("Algorithm: BFS");
+                break;
+            }
+            case "DFS": {
+                algorithmConfig.algorithm = "dfs";
+                $("#algorithm").text("Algorithm: DFS");
+                break;
+            }
+        }
 
     }
     algorithmSpeedClicked(btn) {
@@ -203,15 +253,19 @@ class Toolbar {
         switch (text) {
             case "Usain Bolt":
                 algorithmConfig.speed = 5;
+                root.style.setProperty('--animation-time', '.2s');
                 break;
             case "Fast":
                 algorithmConfig.speed = 50;
+                root.style.setProperty('--animation-time', '.4s');
                 break;
             case "Medium":
                 algorithmConfig.speed = 200;
+                root.style.setProperty('--animation-time', '1s');
                 break;
             case "Slow":
                 algorithmConfig.speed = 500;
+                root.style.setProperty('--animation-time', '1.5s');
                 break;
         }
     }

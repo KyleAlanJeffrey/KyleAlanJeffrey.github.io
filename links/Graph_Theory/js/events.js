@@ -15,10 +15,13 @@ function runAlgorithm() {
         return;
     }
     if (algorithmConfig.algorithm == "bfs") {
-        console.log("here")
         resetNodes();
-        bfsObj = new BFS_class(graph);
-        algorithmConfig.intervalObj = setInterval(() => { BFS(bfsObj) }, algorithmConfig.speed);
+        algorithmConfig.algorithmObj = new BFS_class(graph);
+        algorithmConfig.intervalObj = setInterval(() => { BFS(algorithmConfig.algorithmObj) }, algorithmConfig.speed);
+    } else if (algorithmConfig.algorithm === 'dfs') {
+        resetNodes();
+        algorithmConfig.algorithmObj = new DFSClass(graph);
+        algorithmConfig.intervalObj = setInterval(() => { DFS() }, algorithmConfig.speed);
     } else {
         console.log("No Algorithm Selected!");
         $("#visualize").text("Select an Algorithm!");
@@ -62,7 +65,7 @@ function canvasClicked() {
         nodeCreate(mouseX, mouseY);
     }
 }
-function nodeClickedUp(node) {
+function nodeMouseUp(node) {
     /* Move current node actiong */
     if (!toolbar.nodeCreateTool && !toolbar.edgeCreateTool && !(toolbar.moveStartNode || toolbar.moveDestNode)) {
         toolbar.nodeMoveinProgress = false;
@@ -70,16 +73,9 @@ function nodeClickedUp(node) {
         /* Assign Second Node of Current Edge to "this" node unless duplicate*/
     } else if (toolbar.edgeCreateinProgress) {
         toolbar.edgeCreateinProgress = false;
+        // Delete if Duplicate Edge
+        Edge.deletedUnwantedEdges(node);
 
-        // DELETE DUPLICATE EDGES
-        let edgeWithSameTerminus = edgesArray.filter(edge => edge.node2 == node); //find edges with same node2
-        let edgeWithSameOrigin = edgeWithSameTerminus.filter(edge => edge.node1 == currentEdge.node1);
-        if (edgeWithSameOrigin[0]) {
-            console.log("Can't make duplicate Edges")
-            deleteLastEdge();
-        } else {
-            currentEdge.setNode2(node);
-        }
         /* If currently moving the start or end node, set to this current node */
     } else if (toolbar.moveStartNode || toolbar.moveDestNode) {
         if (toolbar.moveStartNode) {
@@ -91,7 +87,7 @@ function nodeClickedUp(node) {
         }
     }
 }
-function nodeClickedDown(node) {
+function nodeMouseDown(node) {
     let importantNode = node.startNode || node.destNode;
     /* Enable Moving NodeClicked */
     if (!toolbar.nodeCreateTool && !toolbar.edgeCreateTool && !importantNode) {
@@ -127,8 +123,8 @@ function nodeClickedDown(node) {
 function nodeCreate(x, y) {
     let body = document.getElementById("canvas");
     let node = new Node(x - NODE_RADIUS, y - NODE_RADIUS, body);
-    node.nodeElement.onmousedown = function () { nodeClickedDown(node) }; //Cannot do this inside the constructor because can't pass "this" 
-    node.nodeElement.onmouseup = function () { nodeClickedUp(node) }; //Cannot do this inside the constructor because can't pass "this" 
+    node.nodeElement.onmousedown = function () { nodeMouseDown(node) }; //Cannot do this inside the constructor because can't pass "this" 
+    node.nodeElement.onmouseup = function () { nodeMouseUp(node) }; //Cannot do this inside the constructor because can't pass "this" 
     nodesArray.push(node);
     if (nodesArray.length == 1) {
         setStartNode(node);
