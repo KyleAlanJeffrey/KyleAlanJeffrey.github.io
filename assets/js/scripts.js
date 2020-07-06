@@ -17,13 +17,13 @@
     14. Ajax Contact Form
 ==========================================*/
 
-(function($) {
+(function ($) {
     "use strict";
 
     /*================================
     1. Load Function
     ==================================*/
-    $(window).on('load', function() {
+    $(window).on('load', function () {
         prealoaderSetup();
         slider_loaded();
         smoothScrolling($(".nav-menu ul li a[href^='#']"), headerHeight);
@@ -34,7 +34,7 @@
     /*================================
     2. Scroll Function
     ==================================*/
-    $(window).on('scroll', function() {
+    $(window).on('scroll', function () {
         translateUpIsScrollView();
         addClassIsScrollView();
         activeMenuItem($(".nav-menu"));
@@ -54,10 +54,10 @@
     ==================================*/
     function prealoaderSetup() {
         if (!isMobile) {
-            setTimeout(function() {
+            setTimeout(function () {
                 preloader.addClass('preloaded');
             }, 800); //should be 800
-            setTimeout(function() {
+            setTimeout(function () {
                 preloader.remove();
             }, 2000);//should be 2000
 
@@ -70,9 +70,9 @@
     5. Add Class On Slider Content
     ==================================*/
     function slider_loaded() {
-        setTimeout(function() {
-            $('.txtanim1 span').each(function(i) {
-                setTimeout(function() {
+        setTimeout(function () {
+            $('.txtanim1 span').each(function (i) {
+                setTimeout(function () {
                     $('.txtanim1 span').eq(i).css({
                         "transform": "translate3d(0px, 0%, 0px)"
                     });
@@ -114,11 +114,11 @@
     }
 
     function translateUpIsScrollView() {
-        $('.txt1-wrap').each(function() {
+        $('.txt1-wrap').each(function () {
             if (isScrolledIntoView(this) === true) {
                 var $this = $(this).find('.txt1');
-                $this.each(function(i) {
-                    setTimeout(function() {
+                $this.each(function (i) {
+                    setTimeout(function () {
                         $this.eq(i).css({
                             "transform": "translate3d(0px, 0%, 0px)",
                             "opacity": "1"
@@ -130,7 +130,7 @@
     }
 
     function addClassIsScrollView() {
-        $('.txt2_is_show').each(function() {
+        $('.txt2_is_show').each(function () {
             if (isScrolledIntoView(this) === true) {
                 $(this).addClass('is_show');
             }
@@ -143,7 +143,7 @@
     ==================================*/
     function bgParallax() {
         if ($(".parallax").length) {
-            $(".parallax").each(function() {
+            $(".parallax").each(function () {
                 var height = $(this).position().top;
                 var resize = height - $(window).scrollTop();
                 var parallaxSpeed = $(this).data("speed");
@@ -166,7 +166,7 @@
         }
     }
     bgParallax();
-    $(window).on("scroll", function() {
+    $(window).on("scroll", function () {
         bgParallax();
     });
 
@@ -204,7 +204,7 @@
         var links = $links;
         var topGap = $topGap;
 
-        links.on("click", function() {
+        links.on("click", function () {
             if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
                 var target = $(this.hash);
                 target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
@@ -231,11 +231,9 @@
             nav = $links,
             nav_height = nav.outerHeight(),
             home = nav.find(" > ul > li:first");
-
-        sections.each(function() {
+        sections.each(function () {
             var top = $(this).offset().top - nav_height - 40,
                 bottom = top + $(this).outerHeight();
-
             if (cur_pos >= top && cur_pos <= bottom) {
                 nav.find("> ul > li > a").parent().removeClass("active");
                 nav.find("a[href='#" + $(this).attr('id') + "']").parent().addClass("active");
@@ -252,10 +250,10 @@
     /*================================
     13. Gallery Masonary
     ==================================*/
-    $('#container').imagesLoaded(function() {
+    $('#container').imagesLoaded(function () {
 
         // filter items on button click
-        $('.fortfolio-filter').on('click', 'button', function() {
+        $('.fortfolio-filter').on('click', 'button', function () {
             var filterValue = $(this).attr('data-filter');
             $grid.isotope({ filter: filterValue });
         });
@@ -271,7 +269,7 @@
         });
     });
 
-    $('.fortfolio-filter button').on('click', function(event) {
+    $('.fortfolio-filter button').on('click', function (event) {
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         event.preventDefault();
@@ -281,7 +279,7 @@
     14. Ajax Contact Form
     ==================================*/
     $('.screen-reader-response').hide();
-    $('form#cf button#cnt_submit').on('click', function() {
+    $('form#cf button#cnt_submit').on('click', function () {
         var name = $('#name').val();
         var email = $('#email').val();
         var msg = $('#msg').val();
@@ -302,13 +300,13 @@
                 type: "POST",
                 url: "mail.php",
                 data: values,
-                success: function() {
+                success: function () {
                     $('#name').val('');
                     $('#email').val('');
                     $('#msg').val('');
 
                     $('.screen-reader-response').fadeIn().html('<div class="alert alert-success"><strong>Success!</strong> Email has been sent successfully.</div>');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('.screen-reader-response').fadeOut('slow');
                     }, 4000);
                 }
