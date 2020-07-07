@@ -53,7 +53,7 @@
     4. Preloader
     ==================================*/
     function prealoaderSetup() {
-        if (false) {
+        if (!isMobile) {
             setTimeout(function () {
                 preloader.addClass('preloaded');
             }, 800); //should be 800
