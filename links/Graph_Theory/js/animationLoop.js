@@ -11,6 +11,7 @@ const jumbotron = document.getElementsByClassName('jumbotron');
 const infoPanel = document.getElementById('info-panel');
 const Navbar = document.getElementById("navbar");
 const root = document.documentElement;
+const KEYS = { W: 119, E: 101 }
 
 let WIDTH = canvas.clientWidth;
 let HEIGHT = canvas.clientHeight;
@@ -20,7 +21,6 @@ let NAVBAR_WIDTH = Navbar.clientWidth;
 $(document).ready(() => {
     // Start Animation Loop
     window.requestAnimationFrame(loop);
-
     setInterval(() => {
         NAVBAR_HEIGHT = Navbar.clientHeight;
         HEIGHT = window.innerHeight - NAVBAR_HEIGHT;
@@ -33,7 +33,8 @@ $(document).ready(() => {
 
 function loop() {
 
-    if (toolbar.edgeCreateinProgress) { //If current edge is being used
+    // Edge updating
+    if (toolbar.edgeCreateinProgress) {
         let currentEdge = edgesArray.pop();
         edgesArray.forEach(edge => edge.update());
         currentEdge.updateWithMouse(mouseX, mouseY);
@@ -42,7 +43,7 @@ function loop() {
         edgesArray.forEach(edge => edge.update());
     }
 
-    nodesArray.forEach(node => node.update(WIDTH, HEIGHT));     //updade html node elements from node object properties
-
+    // updade html node elements from node object properties
+    nodesArray.forEach(node => node.update(WIDTH, HEIGHT));
     window.requestAnimationFrame(loop)
 }

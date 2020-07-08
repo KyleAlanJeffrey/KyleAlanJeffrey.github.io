@@ -80,9 +80,29 @@ body {
     z-index: 1;
     text-align: center;
 }
+#info-panel .item{
+    overflow: hidden;
+
+}
 
 #info-panel:hover {
     left: 0;
+}
+
+.info-node {
+    width: 100%;
+    padding-top: 100%;
+    border-radius: 50%;
+    background-color: gold;
+}
+
+.info-node-visited{
+    /* animation: node-discovered-anim 3s infinite; */
+    background-color: lightblue;
+}
+.info-node-searched{
+    /* animation: node-searched-anim 3s infinite; */
+    background-color: black;
 }
 
 #info-panel-sticky {

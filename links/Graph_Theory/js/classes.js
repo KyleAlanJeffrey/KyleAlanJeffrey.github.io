@@ -47,7 +47,7 @@ class Node {
 
         nodeAnimater.classList += " node-animater";
 
-        text.innerText = nodesArray.length;
+        // text.innerText = nodesArray.length;
         nodeElement.appendChild(nodeAnimater);
         nodeAnimater.appendChild(text);
         nodeElement.classList.add("node");
@@ -68,8 +68,8 @@ class Node {
     }
     update(boundX, boundY) {
         this.updateVel(boundX, boundY);
-        this.nodeElement.style.top = this.y + 'px'
-        this.nodeElement.style.left = this.x + 'px'
+        this.nodeElement.style.top = this.y + 'px';
+        this.nodeElement.style.left = this.x + 'px';
     }
     updateVel(boundX, boundY) {
         this.x += this.velx;
@@ -118,6 +118,7 @@ class Edge {
         edgeElement.classList = "edge";
         parentElement.appendChild(edgeElement);
         this.edgeElement = edgeElement;
+        this.weighted = false;
 
         if (node2) {
             graph.addEdge(node1.vertex, node2.vertex);
@@ -147,6 +148,7 @@ class Edge {
     static deletedUnwantedEdges(node) {
         const n1 = currentEdge.node1.vertex;
         const n2 = node.vertex;
+        // Self edges not allowed
         if (n1 == n2) {
             deleteLastEdge();
             return;
@@ -209,7 +211,7 @@ class Toolbar {
         $("#edgeCreate").toggleClass("button-active-edge");
         this.nodeCreateTool = false;
         this.edgeCreateTool = !this.edgeCreateTool;
-
+        if (!this.edgeCreateTool) currentEdgeWeight = 1;
         /* If currently making an edge, delete when edge button clicked */
         if (this.edgeCreateinProgress) {
             edgesArray.pop().destroyHTMLElement();

@@ -1,14 +1,28 @@
-var mouseX = 0;
-var mouseY = 0;
+let mouseX = 0;
+let mouseY = 0;
 
-var currentNode = undefined;
-var currentEdge = undefined;
+let currentNode = undefined;
+let currentEdge = undefined;
+let currentEdgeWeight = 1;
 
 
 /* DOM Events */
 document.body.onmousemove = mouseMove;
 document.body.onmouseup = mouseUpOnCanvas;
+document.onkeypress = keyPressHandler;
 
+function keyPressHandler(e) {
+    const key = String.fromCharCode(e.charCode);
+    if (toolbar.edgeCreateTool) {
+        if (key == 'w') {
+            currentEdgeWeight++;
+        }
+        else if (key == 'e' && currentEdgeWeight > 1) {
+            currentEdgeWeight--;
+        }
+        console.log(currentEdgeWeight)
+    }
+}
 function runAlgorithm() {
     if (nodesArray.length == 0) {
         console.log("Can't run algorithm on empty set.");

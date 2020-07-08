@@ -24,9 +24,9 @@
                     onclick="toolbar.nodeCreateButtonClicked()">Nodes</button>
                 <button id="edgeCreate" class="btn btn-md btn-danger m-1"
                     onclick="toolbar.edgeCreateButtonClicked()">Edges</button>
-                <div class="form-check">
+                <!-- <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="edge-checkbox">
-                </div>
+                </div> -->
                 <button id="" class="btn btn-md btn-inverse text-white" onclick="clearNodesandEdges()">Clear
                     Board</button>
 
@@ -71,16 +71,30 @@
     <div class="jumbotron">
         <div class="container-fluid">
             <!-- Information Panel -->
-            <div class="d-flex flex-column justify-content-start  p-3" id="info-panel">
+            <div class="d-flex flex-column justify-content-start px-2" id="info-panel">
                 <div id="info-panel-sticky">INFO</div>
-                <div class="item py-3">
-                    <img src="img/start.png" alt="" srcset="" style="width: 60%;">
-                    <span>Starting Node</span>
+                <div class="item pt-3 px-4">
+                    <img src="img/start.png" alt="" srcset="" style="width: 100%;">
                 </div>
-                <div class="item py-3">
-                    <img src="img/end.png" alt="" style="width: 60%;">
-                    <span>Destination Node</span>
+                <span>Starting Node</span>
+                <div class="item pt-3 px-4">
+                    <img src="img/end.png" alt="" style="width: 100%;">
                 </div>
+                <span>Destination Node</span>
+                <div class="item pt-3 px-4">
+                    <div class="info-node"></div>
+                </div>
+                <span>Unvisited Node</span>
+                <div class="item pt-3 px-4">
+                    <div class="info-node info-node-visited">
+                    </div>
+                </div>
+                <span>Visited Node</span>
+                <div class="item pt-3 px-4">
+                    <div class="info-node info-node-searched">
+                    </div>
+                </div>
+                <span>Searched Node</span>
             </div>
             <div class="row canvas" id="canvas" style="height: 100%;" onclick="canvasClicked();">
                 <div id="start-node-move"></div> <!-- For use when  moving the start node -->
