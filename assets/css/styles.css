@@ -591,7 +591,7 @@
 @media only screen and (min-width: 0) {
     .prt-item-overlay {
         position: absolute;
-        width: 93%;
+        width: 290px;
         height: 93%;
         margin: inherit;
         padding: inherit;
@@ -614,7 +614,7 @@
         transition: opacity 1s;
     }
     .prt-item-overlay:hover {
-        opacity: 1;
+        opacity: .98;
     }
 }
 
