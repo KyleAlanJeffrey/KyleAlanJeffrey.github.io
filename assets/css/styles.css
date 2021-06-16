@@ -591,10 +591,8 @@
 @media only screen and (min-width: 0) {
     .prt-item-overlay {
         position: absolute;
-        width: 290px;
-        height: 93%;
-        margin: inherit;
-        padding: inherit;
+        width: calc(100% - 30px);
+        height: calc(100% - 30px);
         background-color: #464444;
         opacity: 1;
         text-align: center;
@@ -604,8 +602,8 @@
 @media only screen and (min-width: 768px) {
     .prt-item-overlay {
         position: absolute;
-        width: 93%;
-        height: 93%;
+        width: calc(100% - 30px);
+        height: calc(100% - 30px);
         margin: inherit;
         padding: inherit;
         background-color: #464444;
@@ -619,7 +617,7 @@
 }
 @media only screen and (min-width: 768px){
 .overlay-force{
-    width: 96% !important;
+    width: 96% important;
 }
 }
 .prt-item {
